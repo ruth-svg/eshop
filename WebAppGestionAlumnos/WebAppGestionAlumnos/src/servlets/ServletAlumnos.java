@@ -26,10 +26,7 @@ public class ServletAlumnos extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ServletAlumnos() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+
 
 	
 }
