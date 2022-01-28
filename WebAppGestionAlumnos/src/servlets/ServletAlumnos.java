@@ -1,75 +1,12 @@
-package servlets;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
-import jakarta.annotation.Resource;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-import pojos.Alumno;
-import dao.DAOAlumnos;
-import util.getConnection;
-
-/**
- * Servlet implementation class ServletAlumnos
- */
-@WebServlet("/ServletAlumnos")
-@Resource(name = "jdbc/miDatasource")
-public class ServletAlumnos extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ServletAlumnos() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String boton = request.getParameter("boton");
-		String envio = "";
-		if ("Alta".equals(boton))
-			envio = "AltaAlumno.jsp";
-		else if ("Baja".equals(boton))
-			envio = "BajaAlumno.jsp";
-		else if ("Actualiza".equals(boton))
-			envio = "ActualizaAlumno.jsp";
-		else if ("Consulta".equals(boton))
-			envio = "ConsultaAlumno.jsp";
-
-		request.getRequestDispatcher(envio).forward(request, response);
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		// Acción:alta,baja,consulta,actualiza
-		String boton = request.getParameter("boton");
-		boolean error = false;
-		Connection conn = null;
-		String mensaje = "";
-		boolean alt = false;
-		int baj = 0, act = 0;
-
-		// Recogida de párametros del formulario
+		// Recogida de pÃ¡rametros del formulario
 		String nombre = request.getParameter("nombre");
 		String apellidos = request.getParameter("apellidos");
 		String ciclo = request.getParameter("ciclo");
 		String curso = request.getParameter("curso");
 
-		// Creación objeto alumno
+		// CreaciÃ³n objeto alumno
 		Alumno a = new Alumno();
 		a.setNombre(nombre);
 		a.setApellidos(apellidos);
@@ -79,7 +16,7 @@ public class ServletAlumnos extends HttpServlet {
 		
 		try {
 			
-			// Conexión a BD
+			// ConexiÃ³n a BD
 			conn = getConnection.conexionBD();
 			
 			// Llamada a DAOs
@@ -103,7 +40,7 @@ public class ServletAlumnos extends HttpServlet {
 			} else if ("Actualizar".equals(boton)) {
 				act = DAOAlumnos.update(a, conn);
 				if (act == 1) {
-					mensaje = "Actualización realizada correctamente";
+					mensaje = "ActualizaciÃ³n realizada correctamente";
 				} else {
 					mensaje = "El alumno no" + " existe";
 				}
