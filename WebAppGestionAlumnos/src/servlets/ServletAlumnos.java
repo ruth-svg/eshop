@@ -1,14 +1,5 @@
 
-
-		// Recogida de párametros del formulario
-		String nombre = request.getParameter("nombre");
-		String apellidos = request.getParameter("apellidos");
-		String ciclo = request.getParameter("ciclo");
-		String curso = request.getParameter("curso");
-
-		// Creación objeto alumno
-		Alumno a = new Alumno();
-		a.setNombre(nombre);
+CAMBIOS DESDE GIT EN LOCALre);
 		a.setApellidos(apellidos);
 		a.setCiclo(ciclo);
 		a.setCurso(curso);
